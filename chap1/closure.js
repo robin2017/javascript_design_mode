@@ -1,10 +1,10 @@
-var person = (function(){
-  var _name = "robin";
-  return {
-    getName:function(){
-      return _name;
+var person = (function () {
+    var _name = "robin";
+    return {
+        getName: function () {
+            return _name;
+        }
     }
-  }
 })();
 //私有属性
 console.log(person._name);//undefined
