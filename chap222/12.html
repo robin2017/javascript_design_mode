@@ -1,0 +1,14 @@
+<script>
+    function RobinArray() {
+    }
+    RobinArray.prototype = new Array();
+    RobinArray.prototype.robinHello = function () {
+        console.log('hello,robin');
+    };
+    var robin = new RobinArray();
+    console.log(robin);
+    console.log(robin.toString());//调用Array.prototype.toString()
+
+    var o = new Object();
+    console.log(o.toString());//调用Object.prototype.toString()
+</script>

@@ -1,0 +1,26 @@
+<html lang="en">
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+</body>
+<script>
+    var nodes = document.getElementsByTagName('div');
+    //1、普通函数
+//    for (var i = 0, len = nodes.length; i < len; i++) {
+//        nodes[i].onclick = function () {
+//            console.log(i);
+//        }
+//    }
+    //2、匿名立即调用返回函数
+    for (var i = 0, len = nodes.length; i < len; i++) {
+        nodes[i].onclick = (function (i) {
+            return function () {
+                console.log(i)
+            }
+        })(i)
+    }
+</script>
+</html>

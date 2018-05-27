@@ -9,8 +9,8 @@
 </body>
 <script type="text/javascript">
     //1、含有this变量的函数如果赋值，则造成this丢失（函数报错）
-    var getId2 = document.getElementById;
-    console.log(getId2('div1'));
+    //    var getId2 = document.getElementById;
+    //    console.log(getId2('div1'));
 
     //2、外函数封装带有this的内函数，则外函数可以赋值，因为外函数没有this（注意这不是闭包）
     var getId1 = function (id) {
@@ -19,8 +19,8 @@
     console.log(getId1('div1'));
 
     //3、函数通过apply绑定到this指向的对象上，但是缺少arguments（函数报错）
-    var getId4 = document.getElementById.apply(document);
-    console.log(getId4('div4'))
+    //    var getId3 = document.getElementById.apply(document);
+    //    console.log(getId3('div4'));
 
     //4、利用闭包和apply函数，将this所指的对象传入给apply的第一个参数，绑定this
     var commonFunc = (function (func) {
@@ -28,8 +28,19 @@
             return func.apply(document, arguments);
         }
     })(document.getElementById);
-    var getId3 = commonFunc;
-    console.log(getId3('div1'));
+    var getId4 = commonFunc;
+    console.log(getId4('div1'));
+
+    //5、利用apply函数
+    var getId5 = function () {
+        //这里的arguments代表返回函数的参数
+        return document.getElementById.apply(document, arguments)
+    };
+    console.log(getId5('div1'));
+
+    //6、利用bind函数(最简单)
+    var getId6 = document.getElementById.bind(document);
+    console.log(getId6('div1'))
 </script>
 </html>
 

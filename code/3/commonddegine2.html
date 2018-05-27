@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="execute">点击我执行命令</button>
+<button id="undo">点击我执行命令</button>
+<script>
+    //命令接收者
+    var Tv = {
+        open: function () {
+            console.log('打开电视机');
+        },
+        close: function () {
+            console.log('关上电视机');
+        }
+    };
+    //命令
+    var createCommand = function (receiver) {
+        return {
+            execute: function () {
+                return receiver.open(); // 执行命令，打开电视机
+            },
+            undo: function () {
+                return receiver.close(); // 执行命令，关闭电视机
+            }
+        }
+    };
+    //命令发送者window
+    var setCommand = function (command) {
+        document.getElementById('execute').onclick = function () {
+            command.execute(); // 输出：打开电视机
+        };
+        document.getElementById('undo').onclick = function () {
+            command.undo(); // 输出：关闭电视机
+        }
+    };
+    //命令发送者，命令，命令接收者三者关联
+    setCommand(createCommand(Tv));
+</script>
+</body>
+</html>
