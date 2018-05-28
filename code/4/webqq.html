@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<button id="loginBtn">登录</button>
+</body>
+<script>
+    //1、非单例模式
+    //    var createLoginLayer = function () {
+    //        var div = document.createElement('div');
+    //        div.innerHTML = '我是登录浮窗';
+    //        div.style.display = 'none';
+    //        document.body.appendChild(div);
+    //        return div;
+    //    };
+
+
+    //2、单例模式
+    var createLoginLayer = (function () {
+        var div;
+        return function () {
+            if (!div) {
+                div = document.createElement('div');
+                div.innerHTML = '我是登录浮窗';
+                div.style.display = 'none';
+                document.body.appendChild(div);
+            }
+            return div;
+        }
+    })();
+
+    //3、单例/非单例调用
+    document.getElementById('loginBtn').onclick = function () {
+        var loginLayer = createLoginLayer();
+        loginLayer.style.display = 'block';
+    };
+</script>
+</html>
