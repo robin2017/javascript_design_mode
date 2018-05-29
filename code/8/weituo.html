@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div">
+    <input type="button" id="id1" value="11">
+    <input type="button" id="id2" value="12">
+    <input type="button" id="id3" value="13">
+</div>
+
+<script>
+    var father = document.getElementById('div');
+    father.addEventListener('click', function (event) {
+        switch (event.target.id) {
+            case "id1":
+                console.log('click 1');
+                break;
+            case "id2":
+                console.log('click 2');
+                break;
+            case "id3":
+                console.log('click 3');
+                break;
+            default:
+                console.log('error')
+        }
+    }, false)
+</script>
+</body>
+</html>

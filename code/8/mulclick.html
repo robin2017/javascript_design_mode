@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--用户实际点击-->
+<input type="button" value="btn">
+</body>
+<script>
+    function func() {
+        console.log('dom2 body click')
+    }
+    //dom0级事件添加
+    document.body.onclick = function () {
+        console.log('body click')
+    };
+    //dom2级事件添加
+    document.body.addEventListener('click', func, false);
+    //dom0级事件移出
+    document.body.onclick = null;
+    //dom2级事件移出
+    document.body.removeEventListener('click', func, false);
+    document.body.click(); // 模拟用户点击
+</script>
+</html>

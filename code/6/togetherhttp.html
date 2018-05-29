@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="checkbox" id="1">1
+<input type="checkbox" id="2">2
+<input type="checkbox" id="3"> 3
+<input type="checkbox" id="4"> 4
+<input type="checkbox" id="5"> 5
+<input type="checkbox" id="6"> 6
+<input type="checkbox" id="7"> 7
+<input type="checkbox" id="8"> 8
+<input type="checkbox" id="9"> 9
+</body>
+
+<script type="text/javascript">
+    var synchronousFile = function (id) {
+        console.log('开始同步文件，id 为: ' + id);
+    };
+    var checkbox = document.getElementsByTagName('input');
+    //1、代理是锦上添花，点击频率低时候可以去掉
+    var proxySynchronousFile = (function () {
+        var cache = [],
+                timer;
+        return function (id) {
+            cache.push(id);
+            if (timer) { // 保证不会覆盖已经启动的定时器
+                return;
+            }
+            timer = setTimeout(function () {
+                synchronousFile(cache.join(',')); // 2 秒后向本体发送需要同步的ID 集合
+                clearTimeout(timer); // 清空定时器
+                timer = null;
+                cache.length = 0; // 清空ID 集合
+            }, 2000);
+        }
+    })();
+    for (var i = 0, c; c = checkbox[i++];) {
+        c.onclick = function () {
+            if (this.checked === true) {
+                //2、点击频率低的时候不用代理
+                //synchronousFile(this.id);
+                //3、点击频率高的时候用代理
+                proxySynchronousFile(this.id);
+            }
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var myImage = (function () {
+        var imgNode = document.createElement('img');
+        document.body.appendChild(imgNode);
+        return function (src) {
+            imgNode.src = src;
+        }
+    })();
+    //代理是锦上添花，网速快时候可以去掉
+    var proxyImage = (function () {
+        var img = new Image;
+        img.onload = function () {
+            myImage(this.src);
+        };
+        return function (src) {
+            myImage('file:// /C:/Users/svenzeng/Desktop/loading.gif');
+            img.src = src;
+
+        }
+    })();
+    var imgUrl = 'http://img.zcool.cn/community/0142135541fe180000019ae9b8cf86.jpg@1280w_1l_2o_100sh.png'
+    //网速慢用代理
+    proxyImage(imgUrl);
+    //网速快直接用本体
+    //myImage(imgUrl);
+</script>
+</body>
+</html>
