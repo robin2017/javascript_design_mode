@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="count">点我</button>
+<div id="show"></div>
+</body>
+<!--这个就是全局发布订阅对象-->
+<script src="./globalcommon.js"></script>
+<script type="text/JavaScript">
+    //第一个模块：发布者
+    (function () {
+        var count = 0;
+        var button = document.getElementById('count');
+        button.onclick = function () {
+            Event.trigger('add', count++);
+        }
+    })();
+    //第二个模块：订阅者
+    (function () {
+        var div = document.getElementById('show');
+        Event.listen('add', function (count) {
+            div.innerHTML = count;
+        });
+    })();
+</script>
+</html>
+
